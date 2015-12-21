@@ -18,15 +18,16 @@ public class Game {
 
 		run();
 
-		System.out.println("Thank you for playing!");
+		System.out.println("\nThank you for playing!");
 	}
 
 	private static void run() {
 		while (running) {
 			try {
 				ball.prompt();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException exception) {
+				exception.printStackTrace();
+				stop();
 			}
 		}
 	}

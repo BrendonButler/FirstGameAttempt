@@ -1,11 +1,10 @@
 package net.sparkzz.game;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by Brendon Butler on 12/20/2015.
@@ -20,11 +19,13 @@ public class Octoball {
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		random = new Random();
 
-		answers.add("It is certain");
-		answers.add("Yes");
-		answers.add("No");
-		answers.add("Ask again later");
-		answers.add("Very doubtful");
+		try {
+			load();
+		} catch (FileNotFoundException exception) {
+			System.out.println("Problem loading responses from file!");
+			exception.printStackTrace();
+			Game.stop();
+		}
 	}
 
 	public void prompt() throws IOException {
@@ -36,8 +37,16 @@ public class Octoball {
 			return;
 		}
 
-		int i = random.nextInt(5);
+		int i = random.nextInt(answers.size());
 
 		System.out.println(answers.get(i));
+	}
+
+	private void load() throws FileNotFoundException {
+		Scanner scanner = new Scanner(new File("res/responses.txt"));
+
+		while (scanner.hasNextLine()) {
+			answers.add(scanner.nextLine());
+		}
 	}
 }
