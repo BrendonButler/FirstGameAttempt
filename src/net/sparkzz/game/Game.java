@@ -17,14 +17,7 @@ public class Game {
 
 	private static void run() {
 		while (running) {
-			try {
-				System.out.println("Working!");
-				Thread.sleep(16);
-			} catch (InterruptedException e) {
-				System.out.println("There was an issue running the game loop!");
-				running = false;
-				e.printStackTrace();
-			}
+
 		}
 		System.out.println("Thank you for playing!");
 	}
